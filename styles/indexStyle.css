@@ -1,0 +1,39 @@
+hr{
+    color: aquamarine;
+}
+.price{
+    color: gray;
+    font-size: x-large;
+    font-weight: bold;
+}
+.card{
+    border: none;
+    align-items: center;
+    text-align: center;
+}
+.card-img-top{
+    
+    width: 10rem;
+    height: 10rem;
+}
+.new-arrival{
+    margin-bottom: 10rem;
+    margin-top: 5rem;
+
+}
+.cat-btn{
+    margin-top: 7rem;
+    margin-right: 7rem;
+    width: 10rem;
+    height: 3rem;
+}
+.old-price{
+text-decoration: line-through;
+font-size: large;
+color: red;
+}
+.new-price{
+    font-size: x-large;
+    color: green;
+    font-weight: bold;
+}
