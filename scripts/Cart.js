@@ -2,7 +2,8 @@ var cart = document.getElementById('cart')
 var addToCartButtons = document.getElementsByClassName('cart-btn')
 var count = 0
 var total = document.getElementById("cart-total")
-
+//line of text that says cart is empty
+var empty=document.getElementById("empty")
 for (var i = 0; i < addToCartButtons.length; i++) {
     var button = addToCartButtons[i]
     button.addEventListener("click", addToCart)
@@ -10,6 +11,7 @@ for (var i = 0; i < addToCartButtons.length; i++) {
 
 }
 function update() {
+    isEmpty()
     getTotal()
     //adds listeners to remove buttons
     removeButtons = document.getElementsByClassName('remove-btn')
@@ -29,6 +31,15 @@ function update() {
 
 }
 
+function isEmpty(){
+// if cart is not empty dont display line saying cart is empty else display it
+if(cart.getElementsByClassName("cart-item")[0]){    
+    empty.style.display="none"
+}
+else{
+    empty.style.display="block"
+}
+}
 function quantityChange(event) {
     var input = event.target
 
@@ -43,6 +54,7 @@ function removeItem(event) {
     element.remove()
     count--
     getTotal()
+    isEmpty()
 }
 
 function getTotal() {
@@ -73,7 +85,7 @@ function addToCart(event) {
     var title = document.createElement("span")
     title.append(item.getElementsByClassName('card-title')[0].innerText)
     title.id = count.id
-    title.className="cart-title"
+    title.className=" col-2 mr-2 cart-title"
     var imgSrc = item.getElementsByClassName('card-img-top')[0].src
     var price = button.parentElement.getElementsByClassName('price')[0].innerText
 
@@ -81,29 +93,30 @@ function addToCart(event) {
         alert("item already in cart")
     }
     else {
-        var span = document.createElement("span")
-        span.append(price)
-        span.className = "cart-price"
+        var priceSpan = document.createElement("span")
+        priceSpan.append(price)
+        priceSpan.className = "col-1 cart-price"
         var div = document.createElement("div")
         div.id = count
-        div.className = "cart-item" + " " + item.id
+        div.className = "row justify-content-center mb-5 cart-item" + " " + item.id
         var img = document.createElement("img")
         img.src = imgSrc
-        img.className = "cart-img"
+        img.className = " col-sm-1 cart-img"
         var quantity = document.createElement("input")
         quantity.type = "number"
         quantity.value = 1
-        quantity.className = "item-quantity"
+        quantity.className = "col-sm-1 mr-2 ml-5 item-quantity"
         var remove = document.createElement("button")
         remove.innerText = "X"
-        remove.className = " remove-btn btn btn-danger"
+        remove.className = "col-1 remove-btn btn btn-danger"
 
         div.append(title)
         div.append(img)
-        div.append(span)
+        div.append(priceSpan)
         div.append(quantity)
         div.append(remove)
         cart.append(div)
+        console.log(div)
         count += 1
         update()
     }

@@ -41,12 +41,25 @@ color: red;
 width: 3rem;
 }
 .cart-title{
-    text-align: center;
+
 }
 
 .cart-img{
-    margin-right: 4rem;
-    margin-left: 4rem;
-    width: 4rem;
+ 
+    width: 6rem;
     height: 4rem;
 }
+
+.remove-btn{
+    width: 1rem;
+}
+
+#cart{
+    justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    #cart{
+        display: block
+    }
+  }
