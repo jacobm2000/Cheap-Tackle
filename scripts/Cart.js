@@ -2,14 +2,16 @@ var cart = document.getElementById('cart')
 var addToCartButtons = document.getElementsByClassName('cart-btn')
 var count = 0
 var total = document.getElementById("cart-total")
+var checkoutBtn=document.getElementById("checkout")
 //line of text that says cart is empty
-var empty=document.getElementById("empty")
+var empty = document.getElementById("empty")
 for (var i = 0; i < addToCartButtons.length; i++) {
     var button = addToCartButtons[i]
     button.addEventListener("click", addToCart)
 
 
 }
+checkoutBtn.addEventListener("click",checkout)
 function update() {
     isEmpty()
     getTotal()
@@ -21,7 +23,7 @@ function update() {
         button.addEventListener("click", removeItem)
     }
 
-     //adds listeners to quantity input boxes
+    //adds listeners to quantity input boxes
     quan = document.getElementsByClassName('item-quantity')
     for (var i = 0; i < quan.length; i++) {
 
@@ -31,14 +33,23 @@ function update() {
 
 }
 
-function isEmpty(){
-// if cart is not empty dont display line saying cart is empty else display it
-if(cart.getElementsByClassName("cart-item")[0]){    
-    empty.style.display="none"
+function checkout(){
+    cart.innerHTML=""
+    count=0;
+    update()
+    alert("Purchase successful, Thank you for shopping with us")
 }
-else{
-    empty.style.display="block"
-}
+
+
+
+function isEmpty() {
+    // if cart is not empty dont display line saying cart is empty else display it
+    if (cart.getElementsByClassName("cart-item")[0]) {
+        empty.style.display = "none"
+    }
+    else {
+        empty.style.display = "block"
+    }
 }
 function quantityChange(event) {
     var input = event.target
@@ -85,7 +96,7 @@ function addToCart(event) {
     var title = document.createElement("span")
     title.append(item.getElementsByClassName('card-title')[0].innerText)
     title.id = count.id
-    title.className=" col-2 mr-2 cart-title"
+    title.className = " col-2 mr-2 cart-title"
     var imgSrc = item.getElementsByClassName('card-img-top')[0].src
     var price = button.parentElement.getElementsByClassName('price')[0].innerText
 
