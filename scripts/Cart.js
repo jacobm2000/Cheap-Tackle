@@ -2,18 +2,18 @@ var cart = document.getElementById('cart')
 var addToCartButtons = document.getElementsByClassName('cart-btn')
 var count = 0
 var total = document.getElementById("cart-total")
-var checkoutBtn=document.getElementById("checkout")
+var checkoutBtn = document.getElementById("checkout")
 //line of text that says cart is empty
-var empty = document.getElementById("empty")
+var counttxt = document.getElementById("count")
 for (var i = 0; i < addToCartButtons.length; i++) {
     var button = addToCartButtons[i]
     button.addEventListener("click", addToCart)
 
 
 }
-checkoutBtn.addEventListener("click",checkout)
+checkoutBtn.addEventListener("click", checkout)
 function update() {
-    isEmpty()
+    updateCount()
     getTotal()
     //adds listeners to remove buttons
     removeButtons = document.getElementsByClassName('remove-btn')
@@ -33,39 +33,44 @@ function update() {
 
 }
 
-function checkout(){
-    cart.innerHTML=""
-    count=0;
+function checkout() {
+    cart.innerHTML = ""
+    count = 0;
     update()
     alert("Purchase successful, Thank you for shopping with us")
 }
 
 
 
-function isEmpty() {
-    // if cart is not empty dont display line saying cart is empty else display it
+function updateCount() {
+    // if cart is not empty display count which is the number of items in the cart else display message that cart is empty
     if (cart.getElementsByClassName("cart-item")[0]) {
-        empty.style.display = "none"
+        counttxt.textContent = count + " Items in the cart"
     }
     else {
-        empty.style.display = "block"
+        counttxt.textContent = "cart is empty"
     }
 }
 function quantityChange(event) {
     var input = event.target
+    count += parseInt(input.value) - 1
 
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
     getTotal()
+    updateCount()
 }
 
 function removeItem(event) {
     var element = event.target.parentElement
+    let q = element.getElementsByClassName('item-quantity')[0]
+
+    count -= parseInt(q.value)
     element.remove()
-    count--
+
     getTotal()
-    isEmpty()
+    updateCount()
 }
 
 function getTotal() {
@@ -108,7 +113,7 @@ function addToCart(event) {
         priceSpan.append(price)
         priceSpan.className = "col-1 cart-price"
         var div = document.createElement("div")
-        div.id = count
+
         div.className = "row justify-content-center mb-5 cart-item" + " " + item.id
         var img = document.createElement("img")
         img.src = imgSrc
@@ -127,7 +132,6 @@ function addToCart(event) {
         div.append(quantity)
         div.append(remove)
         cart.append(div)
-        console.log(div)
         count += 1
         update()
     }
