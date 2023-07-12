@@ -45,12 +45,12 @@ function checkout() {
 function updateCount() {
     // if cart is not empty display count which is the number of items in the cart else display message that cart is empty
     if (cart.getElementsByClassName("cart-item")[0]) {
-        count=0;
-        let cartquan=cart.getElementsByClassName('item-quantity')
+        count = 0;
+        let cartquan = cart.getElementsByClassName('item-quantity')
         for (var i = 0; i < cartquan.length; i++) {
-            count+=parseInt(cartquan[i].value)
+            count += parseInt(cartquan[i].value)
         }
-        
+
 
         counttxt.textContent = count + " Items in the cart"
     }
@@ -60,7 +60,9 @@ function updateCount() {
 }
 function quantityChange(event) {
     var input = event.target
-    
+    //parse input to int to avoid non-int values
+    input.value=parseInt(input.value)
+
 
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
@@ -71,7 +73,7 @@ function quantityChange(event) {
 
 function removeItem(event) {
     var element = event.target.parentElement
-    
+
     element.remove()
 
     updateCount()
