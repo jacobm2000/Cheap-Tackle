@@ -45,6 +45,14 @@ function checkout() {
 function updateCount() {
     // if cart is not empty display count which is the number of items in the cart else display message that cart is empty
     if (cart.getElementsByClassName("cart-item")[0]) {
+        count=0;
+        let cartquan=cart.getElementsByClassName('item-quantity')
+        for (var i = 0; i < cartquan.length; i++) {
+            console.log("moo")
+            count+=parseInt(cartquan[i].value)
+        }
+        
+
         counttxt.textContent = count + " Items in the cart"
     }
     else {
@@ -53,7 +61,7 @@ function updateCount() {
 }
 function quantityChange(event) {
     var input = event.target
-    count += parseInt(input.value) - 1
+    
 
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
@@ -64,11 +72,10 @@ function quantityChange(event) {
 
 function removeItem(event) {
     var element = event.target.parentElement
-    let q = element.getElementsByClassName('item-quantity')[0]
-
-    count -= parseInt(q.value)
+    
     element.remove()
 
+    updateCount()
     getTotal()
     updateCount()
 }
@@ -100,7 +107,7 @@ function addToCart(event) {
 
     var title = document.createElement("span")
     title.append(item.getElementsByClassName('card-title')[0].innerText)
-    title.id = count.id
+
     title.className = " col-2 mr-2 cart-title"
     var imgSrc = item.getElementsByClassName('card-img-top')[0].src
     var price = button.parentElement.getElementsByClassName('price')[0].innerText
@@ -132,7 +139,6 @@ function addToCart(event) {
         div.append(quantity)
         div.append(remove)
         cart.append(div)
-        count += 1
         update()
     }
 
