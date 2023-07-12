@@ -48,7 +48,6 @@ function updateCount() {
         count=0;
         let cartquan=cart.getElementsByClassName('item-quantity')
         for (var i = 0; i < cartquan.length; i++) {
-            console.log("moo")
             count+=parseInt(cartquan[i].value)
         }
         
