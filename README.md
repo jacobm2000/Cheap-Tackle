@@ -5,7 +5,7 @@ to build a simple, resposive and functional frontend of a store that is pleasing
 ## Screenshots
 
 ### Desktop
-![](./screenshots/desktop)
+![](./screenshots/desktop.jpg)
 
 ### Mobile
-![](./screenshots/mobile)
+![](./screenshots/mobile.jpg)
